@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "615207942680",
+    "project_id": "shoewala-358f9",
+    "storage_bucket": "shoewala-358f9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615207942680:android:b361264347b8bfa9ef216d",
+        "android_client_info": {
+          "package_name": "com.shoewala.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhWr1ywZTDyHsEICEgsT2_Tvrpi3Na9gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
