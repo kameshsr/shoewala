@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.shoewala.app.ui.theme.ShoewalaTheme
 import android.util.Log
 import com.shoewala.app.ui.auth.AuthScreen
+import com.shoewala.app.ui.home.HomeScreen
 import com.shoewala.app.utils.FirebaseUtil
 
 class MainActivity : ComponentActivity() {
@@ -23,21 +24,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoewalaTheme {
-                AuthScreen(
-                    onAuthSuccess = {
-                        Log.d("AUTH", "Login/Register successful")
-                        // Later → navigate to HomeScreen
-                    }
-                )
+                if (FirebaseUtil.getAuth().currentUser != null) {
+                    HomeScreen()
+                } else {
+                    AuthScreen(
+                        onAuthSuccess = { /* recomposition will happen */ }
+                    )
+                }
             }
-        }
-
-        val user: FirebaseUser? = FirebaseUtil.getAuth().currentUser
-
-        if (user != null) {
-            Log.d("AUTH_TEST", "User logged in: ${user.email}")
-        } else {
-            Log.d("AUTH_TEST", "No user logged in")
         }
     }
 }
