@@ -4,11 +4,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.shoewala.app.data.model.Product
 import com.shoewala.app.data.repository.ProductRepository
 import com.shoewala.app.utils.FirebaseUtil
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,21 +25,17 @@ fun HomeScreen() {
         )
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Shoewala") },
-                actions = {
-                    TextButton(onClick = {
-                        FirebaseUtil.getAuth().signOut()
-                    }) {
-                        Text("Logout")
-                    }
-                }
-            )
+    if (products.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("No products available")
         }
-    ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding)) {
+    } else {
+        LazyColumn(modifier = Modifier.padding(16.dp)) {
             items(products) { product ->
                 Card(
                     modifier = Modifier
@@ -51,4 +50,5 @@ fun HomeScreen() {
             }
         }
     }
+
 }
