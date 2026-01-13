@@ -1,5 +1,6 @@
 package com.shoewala.app.data.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.shoewala.app.data.model.Product
 
@@ -15,15 +16,22 @@ object ProductRepository {
             .get()
             .addOnSuccessListener { result ->
                 val list = result.documents.map { doc ->
+
+                    val name = doc.getString("name") ?: ""
+                    val price = doc.getDouble("price") ?: 0.0
+                    val imageUrl = doc.getString("imageUrl") ?: ""
+
+                    Log.d("IMG_URL", "Fetched imageUrl = $imageUrl")
+
                     Product(
                         id = doc.id,
-                        name = doc.getString("name") ?: "",
-                        price = doc.getDouble("price") ?: 0.0,
-                        imageUrl = doc.getString("imageUrl") ?: ""
+                        name = name,
+                        price = price,
+                        imageUrl = imageUrl
                     )
                 }
                 onSuccess(list)
             }
-            .addOnFailureListener { onError(it) }
+
     }
 }
