@@ -30,7 +30,9 @@ import com.shoewala.app.data.repository.ProductRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onProductClick: (Product) -> Unit
+) {
     var products by remember { mutableStateOf<List<Product>>(emptyList()) }
 
     LaunchedEffect(Unit) {
